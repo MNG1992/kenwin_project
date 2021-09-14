@@ -20,8 +20,7 @@ class SecurityPolicy:
 
     def identity(self, request):
         identity = self.authtkt.identify(request)
-        user = DBSession.query(User).filter_by(username=identity['userid']).first()
-        if identity is not None and user is not None:
+        if identity is not None and DBSession.query(User).filter_by(username=identity['userid']).first():
             return identity
 
     def authenticated_userid(self, request):
