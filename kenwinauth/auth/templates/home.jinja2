@@ -1,0 +1,11 @@
+{% extends '_base.html' %}
+{% block content %}
+    <div class="container mt-4">
+        <h1>Hi, {{ view.logged_in|default('User', True) }}</h1>
+        {% if not view.logged_in %}
+            <p>Please <a href="{{ request.route_url('login') }}">login</a></p>
+        {% endif %}
+    </div>
+
+{% endblock %}
+
