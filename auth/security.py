@@ -1,7 +1,7 @@
 import bcrypt
 from pyramid.authentication import AuthTktCookieHelper
 
-from .models import User, DBSession
+from .models import DBSession, User
 
 
 def hash_password(pw):
@@ -20,7 +20,8 @@ class SecurityPolicy:
 
     def identity(self, request):
         identity = self.authtkt.identify(request)
-        if identity is not None and DBSession.query(User).filter_by(username=identity['userid']).first():
+        user = DBSession.query(User).filter_by(username=identity['userid']).first()
+        if identity is not None and user is not None:
             return identity
 
     def authenticated_userid(self, request):

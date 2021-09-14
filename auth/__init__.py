@@ -1,10 +1,9 @@
 from pyramid.config import Configurator
-
-from .security import SecurityPolicy
-
 from sqlalchemy import engine_from_config
 
-from .models import DBSession, Base
+from .models import Base, DBSession
+from .security import SecurityPolicy
+
 
 def main(global_config, **settings):
     engine = engine_from_config(settings, 'sqlalchemy.')

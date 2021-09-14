@@ -1,11 +1,12 @@
 {% extends '_base.html' %}
+{% block title %}{{ name }} | {% endblock %}
 {% block content %}
     {% if message %}
-    <div class="alert alert-danger" role="alert">
-        <div class="container">
-            {{ message }}
+        <div class="alert alert-danger" role="alert">
+            <div class="container">
+                {{ message }}
+            </div>
         </div>
-    </div>
     {% endif %}
     <div class="container mt-4">
         <div class="row justify-content-center align-items-center">

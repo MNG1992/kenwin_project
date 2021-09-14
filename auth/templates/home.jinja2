@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% block title %}{{ name }} | {% endblock %}
 {% block content %}
     <div class="container mt-4">
         <h1>Hi, {{ view.logged_in|default('User', True) }}</h1>

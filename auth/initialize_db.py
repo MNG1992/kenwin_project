@@ -1,19 +1,11 @@
 import os
 import sys
-import transaction
 
+import transaction
+from pyramid.paster import get_appsettings, setup_logging
 from sqlalchemy import engine_from_config
 
-from pyramid.paster import (
-    get_appsettings,
-    setup_logging,
-    )
-
-from .models import (
-    DBSession,
-    User,
-    Base,
-    )
+from .models import Base, DBSession, User
 from .security import hash_password
 
 

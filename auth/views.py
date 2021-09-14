@@ -1,27 +1,20 @@
 from pyramid.httpexceptions import HTTPFound
-from pyramid.security import (
-    remember,
-    forget,
-)
+from pyramid.security import forget, remember
+from pyramid.view import view_config, view_defaults
 
-from pyramid.view import (
-    view_config,
-    view_defaults,
-)
-
-from .models import User, DBSession
+from .models import DBSession, User
 from .security import check_password
 
 
 @view_defaults(renderer='templates/home.jinja2')
-class TutorialViews:
+class AuthViews:
     def __init__(self, request):
         self.request = request
         self.logged_in = request.authenticated_userid
 
     @view_config(route_name='home')
     def home(self):
-        return {'name': 'Home View'}
+        return {'name': 'Home'}
 
     @view_config(route_name='login', renderer='templates/login.jinja2')
     def login(self):
@@ -42,7 +35,6 @@ class TutorialViews:
                 headers = remember(request, login)
                 return HTTPFound(location=came_from, headers=headers)
             message = 'Username or password incorrect'
-
         return dict(
             name='Login',
             message=message,
